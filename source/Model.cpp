@@ -6,6 +6,7 @@
 //=============================================================================
 #include "Model.h"
 #include "Direct3D.h"
+#include "Input.h"
 
 //*****************************************************************************
 // マクロ定義
@@ -119,4 +120,44 @@ void DrawModel(Model* _this)
 
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 
+}
+
+void DrawModelWireFrame(Model * _this)
+{
+	LPDIRECT3DDEVICE9 pDevice = GetDevice();
+	LPDIRECT3DVERTEXBUFFER9 pVtxBuff;
+	LPDIRECT3DINDEXBUFFER9 pIdxBuff;
+	DWORD lighting_state;
+
+	_this->pMesh->GetVertexBuffer(&pVtxBuff);
+	_this->pMesh->GetIndexBuffer(&pIdxBuff);
+
+	// ワールドマトリクスの設定
+	pDevice->SetTransform(D3DTS_WORLD, &_this->transform.mtxWorld);
+
+	pDevice->SetRenderState(D3DRS_TEXTUREFACTOR, D3DCOLOR_RGBA(64, 219, 111, 200));
+	pDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);
+	pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1);
+	pDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TFACTOR);
+	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TFACTOR);
+
+	pDevice->GetRenderState(D3DRS_LIGHTING, &lighting_state);
+	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
+	pDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+
+	pDevice->SetStreamSource(0, pVtxBuff, 0, _this->pMesh->GetNumBytesPerVertex());
+	pDevice->SetFVF(_this->pMesh->GetFVF());
+	pDevice->SetIndices(pIdxBuff);
+	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, _this->pMesh->GetNumVertices(), 0, _this->pMesh->GetNumFaces());
+	
+	pDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+
+	pDevice->SetRenderState(D3DRS_TEXTUREFACTOR, 0xFFFFFFFF);
+	pDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_MODULATE);
+	pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+	pDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+	pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+
+	pDevice->SetRenderState(D3DRS_LIGHTING, lighting_state);
+	
 }

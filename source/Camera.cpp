@@ -33,7 +33,7 @@ void InitCamera(void)
 	g_camera.move_phi = 0.0f;
 	g_camera.dis = 500.0f;
 	g_camera.target_dis = g_camera.posP.length();
-	g_camera.follow_mode = false;
+	g_camera.follow_mode = true;
 	g_view_aspect = (float)SystemParameters::ResolutionX / (float)SystemParameters::ResolutionY;
 
 	// プロジェクションマトリクスの初期化

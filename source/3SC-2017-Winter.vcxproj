@@ -151,6 +151,8 @@
     <ClInclude Include="AllocateHirerachy.h" />
     <ClInclude Include="Bone.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="CollisionTest.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Core.h" />
@@ -158,9 +160,11 @@
     <ClInclude Include="Easing.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Island.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="RectPolygon.h" />
     <ClInclude Include="RectPolygon2D.h" />
+    <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="SkinnedModel.h" />
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="Player.h" />
@@ -173,6 +177,7 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="skybox.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Texture.h" />
@@ -185,15 +190,19 @@
     <ClCompile Include="AllocateHirerachy.cpp" />
     <ClCompile Include="Bone.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="CollisionTest.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Common.cpp" />
     <ClCompile Include="Direct3D.cpp" />
     <ClCompile Include="Easing.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Island.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="RectPolygon.cpp" />
     <ClCompile Include="RectPolygon2D.cpp" />
+    <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="SkinnedModel.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -205,6 +214,7 @@
     <ClCompile Include="Lerp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="skybox.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Texture.cpp" />

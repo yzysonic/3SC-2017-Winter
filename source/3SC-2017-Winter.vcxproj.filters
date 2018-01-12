@@ -22,11 +22,14 @@
     <Filter Include="Core\Manager">
       <UniqueIdentifier>{e19012fb-8fa9-4851-87ac-1a5d57cf6926}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Struct">
-      <UniqueIdentifier>{0a315c99-d72d-4fc3-a20c-dcd7d1a44161}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core\Polygon">
       <UniqueIdentifier>{74bc454b-2266-49fa-9d55-15f440936c9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Physics">
+      <UniqueIdentifier>{6cba7831-0e24-4df3-b3a8-d8f5c2bf52dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\BaseStruct">
+      <UniqueIdentifier>{0a315c99-d72d-4fc3-a20c-dcd7d1a44161}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -109,13 +112,13 @@
       <Filter>Core\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Vector.h">
-      <Filter>Core\Struct</Filter>
+      <Filter>Core\BaseStruct</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Core\Struct</Filter>
+      <Filter>Core\BaseStruct</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
-      <Filter>Core\Struct</Filter>
+      <Filter>Core\BaseStruct</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Scene</Filter>
@@ -125,6 +128,21 @@
     </ClInclude>
     <ClInclude Include="RectPolygon2D.h">
       <Filter>Core\Polygon</Filter>
+    </ClInclude>
+    <ClInclude Include="Island.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="skybox.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>Core\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionTest.h">
+      <Filter>Core\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Core\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -202,19 +220,34 @@
       <Filter>Core\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Core\Struct</Filter>
+      <Filter>Core\BaseStruct</Filter>
     </ClCompile>
     <ClCompile Include="Vector.cpp">
-      <Filter>Core\Struct</Filter>
+      <Filter>Core\BaseStruct</Filter>
     </ClCompile>
     <ClCompile Include="Color.cpp">
-      <Filter>Core\Struct</Filter>
+      <Filter>Core\BaseStruct</Filter>
     </ClCompile>
     <ClCompile Include="RectPolygon.cpp">
       <Filter>Core\Polygon</Filter>
     </ClCompile>
     <ClCompile Include="RectPolygon2D.cpp">
       <Filter>Core\Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="Island.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="skybox.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>Core\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionTest.cpp">
+      <Filter>Core\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Core\Physics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -29,5 +29,6 @@ struct Model
 HRESULT InitModel(Model* _this, const char* fileName);
 void UninitModel(Model* _this);
 void DrawModel(Model* _this);
+void DrawModelWireFrame(Model* _this);
 
 #endif

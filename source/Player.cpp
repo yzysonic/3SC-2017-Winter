@@ -3,19 +3,27 @@
 #include "Input.h"
 
 void MovePlayer(Player *_this);
-
+void JumpPlayer(Player *_this);
 
 void InitPlayer(Player *_this)
 {
 	// トランスフォームの初期設定
 	InitTransform(&_this->transform);
 	_this->transform.child = &_this->model.transform;
+	_this->transform.pos.y = 100.0f;
+	_this->last_pos = _this->model.transform.pos;
 
-	_this->targetAngle = 0.0f;
+	// リジッドボディの初期設定
+	InitRigidbody(&_this->rigidbody, &_this->transform);
+	_this->rigidbody.bGravity = true;
+
+	_this->targetAngle = Deg2Rad(-90.0f);
 
 	InitSkinnedModel(&_this->model, "player.x");
 	_this->model.alphaTestEnable = true;
 	_this->model.transform.rot.y = Deg2Rad(-90.0f);
+
+	_this->state = PlayerStateIdle;
 
 	GetCamera()->target = &_this->transform.pos;
 }
@@ -23,6 +31,11 @@ void InitPlayer(Player *_this)
 void UpdatePlayer(Player *_this)
 {
 	MovePlayer(_this);
+	JumpPlayer(_this);
+
+	_this->last_pos = _this->rigidbody.pos;
+
+	UpdateRigidbody(&_this->rigidbody);
 
 	if (GetKeyboardTrigger(DIK_PGUP))
 	{
@@ -49,6 +62,34 @@ void DrawPlayer(Player *_this)
 	UpdateTransformMtx(&_this->transform);
 
 	DrawSkinnedModel(&_this->model);
+}
+
+void SetPlayerState(Player * _this, PlayerState state)
+{
+	switch (_this->state)
+	{
+	case PlayerStateIdle:
+		switch (state)
+		{
+		case PlayerStateRunning:
+			_this->model.animator->SetTrackAnimationSet(0, _this->model.animationSet[1]);
+			_this->model.animator->SetTrackPosition(0, 0);
+			_this->state = state;
+			break;
+		}
+		break;
+	case PlayerStateRunning:
+		switch (state)
+		{
+		case PlayerStateIdle:
+			_this->model.animator->SetTrackAnimationSet(0, _this->model.animationSet[0]);
+			_this->model.animator->SetTrackPosition(0, 0);
+			_this->state = state;
+			break;
+		}
+		break;
+
+	}
 }
 
 void UninitPlayer(Player *_this)
@@ -105,13 +146,19 @@ void MovePlayer(Player *_this)
 			move.x = x;
 
 			// 移動処理
-			_this->transform.pos += move*5.0f;
+			_this->rigidbody.pos += move*2.0f;
 
 			// 回転角度の計算
 			//_this->targetAngle = -atan2(move.z, move.x);
 			t = asinf(_this->dir.x * move.z - _this->dir.z * move.x);
 			_this->targetAngle = _this->transform.rot.y - t;
 
+			SetPlayerState(_this, PlayerStateRunning);
+
+		}
+		else
+		{
+			SetPlayerState(_this, PlayerStateIdle);
 		}
 
 	}
@@ -123,4 +170,10 @@ void MovePlayer(Player *_this)
 	_this->dir.z = -sinf(_this->transform.rot.y);
 
 
+}
+
+void JumpPlayer(Player * _this)
+{
+	if (GetKeyboardTrigger(DIK_SPACE))
+		_this->rigidbody.vel.y = 100.0f;
 }
