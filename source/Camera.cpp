@@ -112,7 +112,7 @@ void MoveCamera(void)
 	}
 
 	// ÉYÅ[ÉÄ
-	g_camera.target_dis += -GetMouseMoveZ() / 3.0f;
+	g_camera.target_dis += -GetMouseMoveZ() / 6.0f;
 	g_camera.dis = g_camera.dis + (g_camera.target_dis - g_camera.dis)*0.15f;
 
 

@@ -6,6 +6,7 @@
 struct Transform
 {
 	Transform *child;
+	Transform *sibling;
 	Vector3 pos;
 	Vector3 rot;
 	Vector3 scl;
@@ -15,3 +16,5 @@ struct Transform
 
 void InitTransform(Transform *_this);
 void UpdateTransformMtx(Transform *_this, D3DXMATRIX *mtxParent = NULL);
+void AddTransformChild(Transform *_this, Transform *child);
+void AddTransformSibling(Transform *_this, Transform *sibling);

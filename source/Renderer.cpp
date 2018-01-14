@@ -10,7 +10,7 @@ void InitRendererState(void)
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 
 	// レンダリングステートパラメータの設定
-	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);			// カリングを行わない
+	pDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);			// カリングを行わない
 	pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);						// Zバッファを使用
 	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);			// αブレンドを行う
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);		// αソースカラーの指定

@@ -30,10 +30,12 @@ struct RectPolygon
 	Vector2 size;
 };
 
-void InitRectPolygon(RectPolygon *_this, Texture* tex);
+void InitRectPolygon(RectPolygon *_this, Texture* tex = NULL);
 void DrawRectPolygon(RectPolygon *_this);
 void UninitRectPolygon(RectPolygon *_this);
 void SetRectPolygonTexture(RectPolygon *_this, Texture* tex);
 void SetRectPolygonSize(RectPolygon *_this, Vector2 size);
 void SetRectPolygonColor(RectPolygon *_this, Color color);
 void SetRectPolygonOpacity(RectPolygon *_this, float opacity);
+Vertex3D *LockRectPolygonVtx(RectPolygon *_this);
+void UnlockRectPolygonVtx(const RectPolygon *_this);

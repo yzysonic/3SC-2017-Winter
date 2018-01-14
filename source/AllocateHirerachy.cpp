@@ -78,7 +78,7 @@ STDMETHODIMP AllocateHierarchy::CreateMeshContainer(LPCSTR Name, CONST D3DXMESHD
 		strtok(texName, ".");
 
 		newCont->pMaterials[i].pTextureFilename = fileName;
-		newCont->pTextures[i] = LoadTexture(texName, fileName);
+		newCont->pTextures[i] = GetTexture(texName, fileName);
 
 		free(texName);
 	}
@@ -123,10 +123,7 @@ STDMETHODIMP AllocateHierarchy::DestroyMeshContainer(LPD3DXMESHCONTAINER pMeshCo
 		delete m->pEffects;
 	}
 	for (int i = 0; i < (int)m->NumMaterials; i++)
-	{
 		delete[] m->pMaterials[i].pTextureFilename;
-		ReleaseTexture(&m->pTextures[i]);
-	}
 	delete[] m->pMaterials;
 	delete[] m->pTextures;
 
@@ -139,6 +136,29 @@ STDMETHODIMP AllocateHierarchy::DestroyMeshContainer(LPD3DXMESHCONTAINER pMeshCo
 	delete m;
 
 	return D3D_OK;
+}
+
+XMESHCONTAINER * FindMeshContainer(D3DXFRAME * frame)
+{
+	if (frame->pMeshContainer)
+		return (XMESHCONTAINER*)frame->pMeshContainer;
+
+	XMESHCONTAINER* temp = NULL;
+
+	if (frame->pFrameSibling)
+	{
+		temp = FindMeshContainer(frame->pFrameSibling);
+		if (temp) return temp;
+	}
+
+	if (frame->pFrameFirstChild)
+	{
+		temp = FindMeshContainer(frame->pFrameFirstChild);
+		if (temp) return temp;
+	}
+
+
+	return NULL;
 }
 
 char * AllocateHierarchy::newStr(const char * str)

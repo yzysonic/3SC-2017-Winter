@@ -139,3 +139,15 @@ void SetRectPolygonOpacity(RectPolygon * _this, float opacity)
 	_this->pVtxBuff->Unlock();
 
 }
+
+Vertex3D *LockRectPolygonVtx(RectPolygon * _this)
+{
+	Vertex3D *pVtx;
+	_this->pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+	return pVtx;
+}
+
+void UnlockRectPolygonVtx(const RectPolygon * _this)
+{
+	_this->pVtxBuff->Unlock();
+}

@@ -1,21 +1,31 @@
 #include "Texture.h"
 #include "Common.h"
 #include "Window.h"
+#include <unordered_map>
+#include <string>
 
-Texture* LoadTexture(const char* name, const char* file_name, int divX, int divY)
+std::unordered_map<std::string, Texture*> g_textureMap;
+
+Texture* GetTexture(const char* name, const char* file_name, int divX, int divY)
 {
 	char file_dir[256];
-	char temp[256];
+	char fName[256];
 
 	if (file_name == "")
 	{
-		strcpy(temp, name);
-		strcat(temp, ".png");
+		strcpy(fName, name);
+		strcat(fName, ".png");
 	}
 	else
-		strcpy(temp, file_name);
+		strcpy(fName, file_name);
 
-	strcat(strcpy(file_dir, TextureDir), temp);
+	try
+	{
+		return g_textureMap.at(std::string(fName));
+	}
+	catch (std::out_of_range){}
+
+	strcat(strcpy(file_dir, TextureDir), fName);
 
 	Texture *texture = (Texture*) malloc(sizeof(Texture));
 
@@ -40,7 +50,7 @@ Texture* LoadTexture(const char* name, const char* file_name, int divX, int divY
 	else
 	{
 		TCHAR s[128];
-		wsprintf(s, _T("テクスチャー「%s」の読込に失敗しました。"), file_name);
+		wsprintf(s, _T("テクスチャー「%s」の読込に失敗しました。"), fName);
 		MessageBox(GetHWnd(), s, _T("エラー"), MB_OK | MB_ICONWARNING);
 
 		free(texture);
@@ -49,18 +59,48 @@ Texture* LoadTexture(const char* name, const char* file_name, int divX, int divY
 	}
 
 	texture->name = name;
-	texture->file_name = file_name;
+	texture->file_name = fName;
 	texture->size.x = (float)info.Width / divX;
 	texture->size.y = (float)info.Height / divY;
 	texture->divideX = divX;
 	texture->divideY = divY;
 
+	g_textureMap[fName] = texture;
+
 	return texture;
 }
 
-void ReleaseTexture(Texture **tex)
+void ReleaseTexture(const char* file_name)
 {
-	if (*tex == NULL) return;
-	SafeRelease((*tex)->pDXTex);
-	SafeFree(*tex);
+	if (file_name == NULL) return;
+
+	Texture *tex;
+	try
+	{
+		tex = g_textureMap.at(file_name);
+	}
+	catch (std::out_of_range) 
+	{
+		return;
+	}
+	
+	SafeRelease(tex->pDXTex);
+	SafeFree(tex);
+
+	g_textureMap.erase(file_name);
+}
+
+void ReleaseTextureAll(void)
+{
+	if (g_textureMap.size() == 0)
+		return;
+
+	for (auto pair : g_textureMap)
+	{
+		Texture* tex = pair.second;
+		SafeRelease(tex->pDXTex);
+		SafeFree(tex);
+	}
+
+	g_textureMap.clear();
 }

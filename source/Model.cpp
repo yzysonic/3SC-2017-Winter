@@ -59,7 +59,7 @@ HRESULT InitModel(Model* _this, const char* fileName)
 			char texName[256];
 			strcpy(texName, texFile);
 			strtok(texName, ".");
-			_this->pTextures[i] = LoadTexture(texName, _this->pMaterials[i].pTextureFilename);
+			_this->pTextures[i] = GetTexture(texName, _this->pMaterials[i].pTextureFilename);
 		}
 		else
 			_this->pTextures[i] = NULL;
@@ -76,8 +76,6 @@ void UninitModel(Model* _this)
 {
 	SafeRelease(_this->pMesh);
 	SafeRelease(_this->pBuffMaterial);
-	for (DWORD i = 0; i < _this->numMaterial; i++)
-		ReleaseTexture(&_this->pTextures[i]);
 	SafeFree(_this->pTextures);
 }
 

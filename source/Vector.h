@@ -56,6 +56,9 @@ public:
 	Vector3& operator *= (const float f);
 	Vector3& operator /= (const float f);
 
+	Vector3 operator + (void) const;
+	Vector3 operator - (void) const;
+
 	Vector3 operator + (const Vector3 v) const;
 	Vector3 operator - (const Vector3 v) const;
 	Vector3 operator * (const float f) const;

@@ -167,6 +167,16 @@ Vector3 & Vector3::operator/=(const float f)
 	return *this;
 }
 
+Vector3 Vector3::operator+(void) const
+{
+	return *this;
+}
+
+Vector3 Vector3::operator-(void) const
+{
+	return Vector3(-this->x, -this->y, -this->z);
+}
+
 Vector3 Vector3::operator+(const Vector3 v) const
 {
 	return Vector3(this->x + v.x, this->y + v.y, this->z + v.z);

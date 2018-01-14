@@ -17,8 +17,7 @@
 //*****************************************************************************
 // プロトタイプ宣言
 //*****************************************************************************
-XMESHCONTAINER *FindMeshContainer(D3DXFRAME *frame);
-D3DXFRAME *FindFrameByName(const char* name, D3DXFRAME *frame);
+
 
 
 //=============================================================================
@@ -123,61 +122,36 @@ void DrawSkinnedModel(SkinnedModel* _this)
 	pDevice->SetRenderState(D3DRS_ALPHAREF, 0);
 	pDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 
-	if (_this->meshCont->pSkinInfo != NULL)
-	{
-		// アニメーション更新
-		_this->animator->AdvanceTime(0.016f, 0);
-		// ボーンマトリクス更新
-		UpdateBoneMatrix(_this->transform.mtxWorld, (Bone*)_this->rootFrame->pFrameFirstChild->pFrameFirstChild);
+	// アニメーション更新
+	_this->animator->AdvanceTime(0.016f, 0);
+	// ボーンマトリクス更新
+	UpdateBoneMatrix(_this->transform.mtxWorld, (Bone*)_this->rootFrame->pFrameFirstChild->pFrameFirstChild);
 
-		for (DWORD i = 0; i < _this->meshCont->numBoneCombinations; i++) {
-			DWORD boneNum = 0;
-			for (DWORD j = 0; j < _this->meshCont->maxFaceInfl; j++) {
-				DWORD id = _this->combs[i].BoneId[j];
-				if (id != UINT_MAX) {
-					pDevice->SetTransform(D3DTS_WORLDMATRIX(j), &(_this->boneMap[id]->mtxCombined));
-					boneNum++;
-				}
+	for (DWORD i = 0; i < _this->meshCont->numBoneCombinations; i++) {
+		DWORD boneNum = 0;
+		for (DWORD j = 0; j < _this->meshCont->maxFaceInfl; j++) {
+			DWORD id = _this->combs[i].BoneId[j];
+			if (id != UINT_MAX) {
+				pDevice->SetTransform(D3DTS_WORLDMATRIX(j), &(_this->boneMap[id]->mtxCombined));
+				boneNum++;
 			}
-			pDevice->SetRenderState(D3DRS_VERTEXBLEND, boneNum - 1);
-
-			int attribID = _this->combs[i].AttribId;
-
-			//マテリアルの設定
-			pDevice->SetMaterial(&_this->meshCont->pMaterials[attribID].MatD3D);
-
-			//テクスチャの設定
-			if(_this->meshCont->pTextures[attribID])
-				pDevice->SetTexture(0, _this->meshCont->pTextures[attribID]->pDXTex);
-			else
-				pDevice->SetTexture(0, NULL);
-			//描画
-			_this->meshCont->MeshData.pMesh->DrawSubset(i);
 		}
+		pDevice->SetRenderState(D3DRS_VERTEXBLEND, boneNum - 1);
+
+		int attribID = _this->combs[i].AttribId;
+
+		//マテリアルの設定
+		pDevice->SetMaterial(&_this->meshCont->pMaterials[attribID].MatD3D);
+
+		//テクスチャの設定
+		if (_this->meshCont->pTextures[attribID])
+			pDevice->SetTexture(0, _this->meshCont->pTextures[attribID]->pDXTex);
+		else
+			pDevice->SetTexture(0, NULL);
+		//描画
+		_this->meshCont->MeshData.pMesh->DrawSubset(i);
+
 	}
-
-	else
-	{
-		// ワールドマトリクスの設定
-		pDevice->SetTransform(D3DTS_WORLD, &_this->transform.mtxWorld);
-
-		for (DWORD i = 0; i < _this->meshCont->NumMaterials; i++)
-		{
-			//マテリアルの設定
-			pDevice->SetMaterial(&_this->meshCont->pMaterials[i].MatD3D);
-
-			//テクスチャの設定
-			if(_this->meshCont->pTextures[i])
-				pDevice->SetTexture(0, _this->meshCont->pTextures[i]->pDXTex);
-			else
-				pDevice->SetTexture(0, NULL);
-
-			//描画
-			_this->meshCont->MeshData.pMesh->DrawSubset(i);
-		}
-	}
-
-
 
 	 //マテリアルを元に戻す
 	pDevice->SetMaterial(&matDef);
@@ -186,29 +160,12 @@ void DrawSkinnedModel(SkinnedModel* _this)
 
 }
 
-
-XMESHCONTAINER * FindMeshContainer(D3DXFRAME * frame)
+void SetSkinnedModelAnime(SkinnedModel * _this, int n)
 {
-	if (frame->pMeshContainer)
-		return (XMESHCONTAINER*)frame->pMeshContainer;
-
-	XMESHCONTAINER* temp = NULL;
-
-	if (frame->pFrameSibling)
-	{
-		temp = FindMeshContainer(frame->pFrameSibling);
-		if (temp) return temp;
-	}
-
-	if (frame->pFrameFirstChild)
-	{
-		temp = FindMeshContainer(frame->pFrameFirstChild);
-		if (temp) return temp;
-	}
-
-
-	return NULL;
+	_this->animator->SetTrackAnimationSet(0, _this->animationSet[n]);
+	_this->animator->SetTrackPosition(0, 0);
 }
+
 
 D3DXFRAME * FindFrameByName(const char * name, D3DXFRAME *frame)
 {

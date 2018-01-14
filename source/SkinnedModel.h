@@ -34,5 +34,7 @@ struct SkinnedModel
 HRESULT InitSkinnedModel(SkinnedModel* _this, const char* fileName);
 void UninitSkinnedModel(SkinnedModel* _this);
 void DrawSkinnedModel(SkinnedModel* _this);
+void SetSkinnedModelAnime(SkinnedModel* _this, int n);
+D3DXFRAME *FindFrameByName(const char* name, D3DXFRAME *frame);
 
 #endif

@@ -11,7 +11,7 @@
 
 #define	POS_X_CAM		(0.0f)						// カメラの初期位置(X座標)
 #define	POS_Y_CAM		(15.0f)						// カメラの初期位置(Y座標)
-#define	POS_Z_CAM		(-50.0f)					// カメラの初期位置(Z座標)
+#define	POS_Z_CAM		(-150.0f)					// カメラの初期位置(Z座標)
 #define	VIEW_ANGLE		(D3DXToRadian(45.0f))		// ビュー平面の視野角
 #define	VIEW_NEAR_Z		(10.0f)						// ビュー平面のNearZ値
 #define	VIEW_FAR_Z		(5000.0f)					// ビュー平面のFarZ値

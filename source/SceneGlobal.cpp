@@ -16,4 +16,5 @@ void DrawSceneGlobal(void)
 
 void UninitSceneGlobal(void)
 {
+	ReleaseTextureAll();
 }

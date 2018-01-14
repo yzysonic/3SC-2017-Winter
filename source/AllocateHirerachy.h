@@ -28,3 +28,5 @@ public:
 	STDMETHOD(DestroyMeshContainer)(THIS_ LPD3DXMESHCONTAINER pMeshContainerToFree);
 	char *newStr(const char* str);
 };
+
+XMESHCONTAINER *FindMeshContainer(D3DXFRAME *frame);

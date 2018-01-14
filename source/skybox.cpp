@@ -46,7 +46,7 @@ HRESULT InitSkybox(void)
 
 	// テクスチャの読み込み
 	for (int i = 0; i < 6; i++)
-		g_pTexSkybox[i] = LoadTexture(SkyboxTextureName[i]);
+		g_pTexSkybox[i] = GetTexture(SkyboxTextureName[i]);
 
 	return S_OK;
 }
@@ -58,7 +58,7 @@ void UninitSkybox(void)
 {
 	for (int i = 0; i < 6; i++)
 	{
-		ReleaseTexture(&g_pTexSkybox[i]);
+		ReleaseTexture(g_pTexSkybox[i]->file_name);
 		SafeRelease(g_pVtxBuffSkybox);
 	}
 }
