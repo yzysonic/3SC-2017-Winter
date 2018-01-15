@@ -10,7 +10,7 @@
 // マクロ定義
 //*****************************************************************************
 #define	TEXTURE_SHADOW	"shadow"		// 読み込むテクスチャファイル名
-#define SHADOW_MAX	(10)
+#define SHADOW_MAX	(20)
 
 #define	SHADOW_SIZE_X	(10.0f)			// 影のサイズ(X方向)
 #define	SHADOW_SIZE_Z	(10.0f)			// 影のサイズ(Z方向)

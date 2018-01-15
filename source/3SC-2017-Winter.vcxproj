@@ -35,7 +35,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -149,15 +149,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AllocateHirerachy.h" />
+    <ClInclude Include="AnimatedModel.h" />
     <ClInclude Include="Bone.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
-    <ClInclude Include="CollisionTest.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Direct3D.h" />
     <ClInclude Include="Easing.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Island.h" />
@@ -165,6 +167,8 @@
     <ClInclude Include="RectPolygon.h" />
     <ClInclude Include="RectPolygon2D.h" />
     <ClInclude Include="Rigidbody.h" />
+    <ClInclude Include="SceneTitle.h" />
+    <ClInclude Include="Shadow.h" />
     <ClInclude Include="SkinnedModel.h" />
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="Player.h" />
@@ -188,14 +192,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AllocateHirerachy.cpp" />
+    <ClCompile Include="AnimatedModel.cpp" />
     <ClCompile Include="Bone.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="CollisionTest.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Common.cpp" />
     <ClCompile Include="Direct3D.cpp" />
     <ClCompile Include="Easing.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Island.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -203,6 +209,8 @@
     <ClCompile Include="RectPolygon.cpp" />
     <ClCompile Include="RectPolygon2D.cpp" />
     <ClCompile Include="Rigidbody.cpp" />
+    <ClCompile Include="SceneTitle.cpp" />
+    <ClCompile Include="Shadow.cpp" />
     <ClCompile Include="SkinnedModel.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="Player.cpp" />

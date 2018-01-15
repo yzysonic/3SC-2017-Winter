@@ -138,11 +138,23 @@
     <ClInclude Include="Rigidbody.h">
       <Filter>Core\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionTest.h">
-      <Filter>Core\Physics</Filter>
-    </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>Core\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Shadow.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedModel.h">
+      <Filter>Core\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Core\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -243,11 +255,21 @@
     <ClCompile Include="Rigidbody.cpp">
       <Filter>Core\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionTest.cpp">
-      <Filter>Core\Physics</Filter>
-    </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>Core\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Shadow.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedModel.cpp">
+      <Filter>Core\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Core\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTitle.cpp" />
   </ItemGroup>
 </Project>

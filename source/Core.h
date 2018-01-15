@@ -5,6 +5,7 @@
 #include "Time.h"
 #include "Transform.h"
 #include "Color.h"
+#include "SceneManager.h"
 #include "Collider.h"
 #include "Collision.h"
 #include "RectPolygon.h"

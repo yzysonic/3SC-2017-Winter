@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include "SceneGlobal.h"
+#include "SceneTitle.h"
 #include "SceneGame.h"
 
 void UninitCurrentScene(void);
@@ -21,7 +22,7 @@ void UpdateScene(void)
 	switch (g_current_scene)
 	{
 	case SceneTitle:
-
+		UpdateSceneTitle();
 		break;
 	case SceneGame:
 		UpdateSceneGame();
@@ -41,7 +42,7 @@ void DrawScene(void)
 	switch (g_current_scene)
 	{
 	case SceneTitle:
-
+		DrawSceneTitle();
 		break;
 	case SceneGame:
 		DrawSceneGame();
@@ -62,7 +63,7 @@ void SetScene(Scene scene)
 	switch (scene)
 	{
 	case SceneTitle:
-
+		InitSceneTitle();
 		break;
 	case SceneGame:
 		InitSceneGame();
@@ -86,7 +87,7 @@ void UninitCurrentScene(void)
 	switch (g_current_scene)
 	{
 	case SceneTitle:
-
+		UninitSceneTitle();
 		break;
 	case SceneGame:
 		UninitSceneGame();

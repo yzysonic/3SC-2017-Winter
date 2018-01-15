@@ -65,6 +65,7 @@ void SwapEnemy(Vector3 pos)
 		{
 			InitEnemy(enemy);
 			enemy->rigidbody.pos = pos;
+			enemy->timer = i;
 			return;
 		}
 	}
@@ -123,8 +124,10 @@ void DrawEnemy(Enemy * _this)
 
 	DrawModel(&g_pModelEnemy[_this->animeFrame]);
 
+#ifdef _DEBUG
 	UpdateTransformMtx(&g_sphere.transform, &_this->transform.mtxWorld);
 	DrawModel(&g_sphere);
+#endif
 }
 
 void SetEnemyState(Enemy * _this, EnemyState state)

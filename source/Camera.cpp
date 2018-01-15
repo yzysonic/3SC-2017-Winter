@@ -32,7 +32,7 @@ void InitCamera(void)
 	g_camera.move_theta = 0.0f;
 	g_camera.move_phi = 0.0f;
 	g_camera.dis = 500.0f;
-	g_camera.target_dis = g_camera.posP.length();
+	g_camera.target_dis = g_camera.posP.length()+100.0f;
 	g_camera.follow_mode = true;
 	g_view_aspect = (float)SystemParameters::ResolutionX / (float)SystemParameters::ResolutionY;
 
@@ -46,9 +46,7 @@ void InitCamera(void)
 void UpdateCamera(void)
 {
 
-#ifdef _DEBUG
 	MoveCamera();
-#endif
 
 	// フォローモードの切り替え
 	if (GetKeyboardTrigger(DIK_F))
@@ -112,7 +110,7 @@ void MoveCamera(void)
 	}
 
 	// ズーム
-	g_camera.target_dis += -GetMouseMoveZ() / 6.0f;
+	g_camera.target_dis += -GetMouseMoveZ() / 12.0f;
 	g_camera.dis = g_camera.dis + (g_camera.target_dis - g_camera.dis)*0.15f;
 
 

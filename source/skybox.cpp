@@ -43,10 +43,8 @@ HRESULT InitSkybox(void)
 
 	// 頂点、情報の作成
 	MakeVertexSkybox();
-
 	// テクスチャの読み込み
-	for (int i = 0; i < 6; i++)
-		g_pTexSkybox[i] = GetTexture(SkyboxTextureName[i]);
+	LoadSkyboxTexture();
 
 	return S_OK;
 }
@@ -58,7 +56,6 @@ void UninitSkybox(void)
 {
 	for (int i = 0; i < 6; i++)
 	{
-		ReleaseTexture(g_pTexSkybox[i]->file_name);
 		SafeRelease(g_pVtxBuffSkybox);
 	}
 }
@@ -110,6 +107,12 @@ void DrawSkybox(void)
 	pDevice->SetRenderState(D3DRS_LIGHTING, TRUE);
 	pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
 
+}
+
+void LoadSkyboxTexture(void)
+{
+	for (int i = 0; i < 6; i++)
+		g_pTexSkybox[i] = GetTexture(SkyboxTextureName[i]);
 }
 
 //=============================================================================

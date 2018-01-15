@@ -19,7 +19,7 @@ int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // メモリリーク自動検出
 #endif
 
-	SystemParameters::windowTitle = "3SC 2017 Winter";
+	SystemParameters::windowTitle = "除草大作戦";
 
 	// 初期化
 	if (FAILED(InitSystem()))
@@ -33,7 +33,7 @@ int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 #ifndef _DEBUG
 	SetScene(SceneTitle);
 #else
-	SetScene(SceneGame);
+	SetScene(SceneTitle);
 #endif
 
 	// ゲームループ

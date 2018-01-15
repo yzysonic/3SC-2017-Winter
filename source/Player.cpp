@@ -11,7 +11,7 @@ void InitPlayer(Player *_this)
 {
 	// トランスフォームの初期化
 	InitTransform(&_this->transform);
-	_this->transform.pos = Vector3(-20.0f, 50.0f, -20.0f);
+	_this->transform.pos = Vector3(-20.0f, 25.0f, -20.0f);
 	AddTransformChild(&_this->transform, &_this->model.transform);
 	GetCamera()->target = &_this->transform.pos;
 
@@ -34,6 +34,7 @@ void InitPlayer(Player *_this)
 	// 他の初期化
 	_this->targetAngle = Deg2Rad(-90.0f);
 	SetIdlePlayer(_this);
+	_this->state = PlayerStateIdle;
 	_this->state_timer = 0.0f;
 	_this->isMoveable = true;
 

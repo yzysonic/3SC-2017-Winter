@@ -19,5 +19,6 @@ HRESULT InitSkybox(void);
 void UninitSkybox(void);
 void UpdateSkybox(void);
 void DrawSkybox(void);
+void LoadSkyboxTexture(void);
 
 #endif
